@@ -1,0 +1,3 @@
+---
+# tasks file for ceph-mon
+- include: deploy_monitors.yml

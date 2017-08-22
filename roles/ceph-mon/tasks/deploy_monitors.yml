@@ -1,0 +1,3 @@
+---
+- name: Create a keyring for your cluster and generate a monitor secret key.
+

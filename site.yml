@@ -1,0 +1,7 @@
+---
+# Defines deployment design and assigns role to server groups
+
+- hosts: mons
+  gather_facts: false
+  become: True
+  roles: ceph-mon
