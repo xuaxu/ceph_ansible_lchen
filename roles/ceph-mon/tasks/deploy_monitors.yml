@@ -1,3 +1,12 @@
 ---
 - name: Create a keyring for your cluster and generate a monitor secret key.
+  command: ceph-authtool --create-keyring /tmp/ceph.mon.keyring --gen-key -n mon. --cap mon 'allow *'
+  become: false
 
+- name: Generate an administrator keyring, generate a client.admin user and add the user to the keyring.
+  command: ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --gen-key -n client.admin --set-uid=0 --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow *' --cap mgr 'allow *'
+  become: true
+
+- name: Add the client.admin key to the ceph.mon.keyring.
+  command: ceph-authtool /tmp/ceph.mon.keyring --import-keyring /etc/ceph/ceph.client.admin.keyring
+  become: false

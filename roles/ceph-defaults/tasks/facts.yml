@@ -1,0 +1,13 @@
+---
+
+- name: get hostname
+  command: hostname
+  register: ansible_hostname
+
+- set_fact:
+    monitor_name: "{{ ansible_hostname }}"
+
+- name: generate cluster fsid
+  local_action: shell uuidgen
+  register: cluster_uuid
+  become: false

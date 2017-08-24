@@ -1,0 +1,7 @@
+---
+
+- name: get monitor name
+  debug: var=monitor_name verbosity=0
+
+- name: get fsid
+  debug: var=cluster_uuid verbosity=0

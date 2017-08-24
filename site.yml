@@ -4,4 +4,6 @@
 - hosts: mons
   gather_facts: false
   become: True
-  roles: ceph-mon
+  roles: 
+    - ceph-defaults
+    - ceph-mon
