@@ -1,0 +1,5 @@
+---
+- name: "generate ceph configuration file: {{ cluster }}.conf"
+  template:
+    src: ceph.conf.j2
+    dest: /etc/ceph/{{ cluster }}.conf

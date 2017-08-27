@@ -1,0 +1,4 @@
+---
+
+- name: test variables
+  debug: var=ansible_hostname verbosity=0

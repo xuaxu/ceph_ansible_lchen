@@ -2,8 +2,10 @@
 # Defines deployment design and assigns role to server groups
 
 - hosts: mons
-  gather_facts: false
+  gather_facts: true
   become: True
   roles: 
+#    - test
     - ceph-defaults
+    - ceph-common
     - ceph-mon

@@ -1,2 +1,4 @@
 ---
 # tasks file for ceph-common
+
+- include: generate_ceph_conf.yml

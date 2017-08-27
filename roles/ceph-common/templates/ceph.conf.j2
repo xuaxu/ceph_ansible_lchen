@@ -2,10 +2,28 @@
 auth cluster required = cephx
 auth service required = cephx
 auth client required = cephx
-fsid = a7f64266-0894-4f1e-a635-d0aeaca0e993
-mon initial members = node1
-mon host = 192.168.0.1
-public network = 192.168.0.0/24
+fsid = {{ fsid }}
+
+{% if groups[mon_group_name] is defined %}
+mon initial members = {% for host in groups[mon_group_name] %}
+    {%- if hostvars[host]['ansible_hostname'] is defined -%}
+      {{ hostvars[host]['ansible_hostname'] }}
+    {%- endif %}
+    {%- if not loop.last %},{% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if groups[mon_group_name] is defined %}
+mon host = {% for host in groups[mon_group_name] -%}
+    {{ host }}
+    {%- if not loop.last %},{% endif %}
+  {%- endfor -%}
+{% endif %}
+
+{% if public_network is defined %}
+public network = {{ public_network }}
+{% endif %}
+
 osd journal size = 1024
 osd pool default size = 2
 osd pool default min size = 1
