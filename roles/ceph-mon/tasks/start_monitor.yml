@@ -1,0 +1,7 @@
+---
+- name: start the monitor service
+  service:
+    name: ceph-mon@{{ monitor_name }}
+    state: started
+    enabled: yes
+  changed_when: false

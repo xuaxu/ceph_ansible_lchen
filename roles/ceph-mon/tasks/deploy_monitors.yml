@@ -13,6 +13,8 @@
 
 - name: Generate a monitor map using the hostname(s), host IP address(es) and the FSID. Save it as /tmp/monmap
   command: monmaptool --create --add {{ monitor_name }} {{ monitor_address }} --fsid {{ fsid }} /tmp/monmap
+  args:
+    creates: /tmp/monmap
   become: false
 
 - name: create (and fix ownership of) monitor directory
@@ -28,4 +30,4 @@
 - name: Mark that the monitor is created and ready to be started
   file:
     path: /var/lib/ceph/mon/{{ cluster }}-{{ monitor_name }}/done
-    state: file
+    state: touch
